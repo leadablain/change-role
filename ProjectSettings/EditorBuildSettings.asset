@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/SAMPLE/Test.unity
     guid: 121ededbad51f444e9ecfe7a8528c523
+  - enabled: 1
+    path: Assets/ChangeRole/Demo/DemoSceneA.unity
+    guid: 83b29c38bccb9400089c722a84857bc2
+  - enabled: 1
+    path: Assets/ChangeRole/Demo/DemoSceneB.unity
+    guid: f450ebcce2779448b863dad0c06b584d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 691a7663813b06841b917abc0e2212f4, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f55dd36f8f1fdb343a51db0714f62e65, type: 2}
