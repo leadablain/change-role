@@ -1,0 +1,48 @@
+// VERSION AVEC EVENEMENTS
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
+
+
+public class MySceneChanger : MonoBehaviour
+{
+    public string nextScene;
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        if(!SingletonManager.GetModeVR()){
+            // KEYBOARD
+            //Load a scene by the name "SceneName" if you press the x key.
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Debug.Log("Touche :"+KeyCode.X);
+                SceneManager.LoadScene(nextScene);
+            }
+        }
+
+    }
+
+    private void OnEnable()
+    {
+        // Trouve l'objet contenant l'EventManager et ajoute une méthode de gestionnaire d'événement à son événement
+        EventManager eventManager = FindObjectOfType<EventManager>();
+        eventManager.buttonAEvent.AddListener(ChangeScene);
+    }
+
+    private void ChangeScene()
+    {
+        // Affiche un message de débogage indiquant que l'événement a été reçu
+        Debug.Log("Event received!");
+        SceneManager.LoadScene(nextScene);
+    }
+
+
+}

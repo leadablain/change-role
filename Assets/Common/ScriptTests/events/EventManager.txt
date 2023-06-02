@@ -1,0 +1,60 @@
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
+
+public class EventManager : MonoBehaviour
+{
+    // Définit un événement Unity nommé "myEvent"
+    public UnityEvent myEvent;
+    public UnityEvent buttonAEvent;    
+
+    private GameObject rightHand;
+    private XRController xrController;
+
+    void Start()
+    {
+        if(SingletonManager.GetModeVR()){
+            rightHand = GameObject.Find("XR Controller Device");
+            xrController = rightHand.GetComponent<XRController>();
+        }
+    }
+
+    // Cette méthode est appelée à chaque image du jeu
+    private void Update()
+    {
+        // Si la touche Espace est enfoncée, déclenche l'événement
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            myEvent.Invoke();
+        }
+
+        if (xrController.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButton))
+        {
+                Debug.Log("Primary Button pressed : "+primaryButton);
+                buttonAEvent.Invoke();
+        }
+
+    }
+}
+
+
+// using UnityEngine;
+// using UnityEngine.Events;
+
+// public class EventManager : MonoBehaviour
+// {
+//     // Définit un événement Unity nommé "myEvent"
+//     public UnityEvent myEvent;
+
+//     // Cette méthode est appelée à chaque image du jeu
+//     private void Update()
+//     {
+//         // Si la touche Espace est enfoncée, déclenche l'événement
+//         if (Input.GetKeyDown(KeyCode.Space))
+//         {
+//             myEvent.Invoke();
+//         }
+//     }
+// }
+

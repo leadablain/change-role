@@ -1,0 +1,45 @@
+using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+
+public class OculusInputManager : MonoBehaviour
+{
+    private XRController rightController;
+
+    private void Awake()
+    {
+        // Récupère le contrôleur droit
+        rightController = GetComponent<XRController>();
+    }
+
+    private void OnEnable()
+    {
+        // Abonnez-vous aux événements de la manette droite
+        rightController.selectInteraction.AddListener(OnRightSelect);
+        rightController.activateInteraction.AddListener(OnRightActivate);
+        rightController.deactivateInteraction.AddListener(OnRightDeactivate);
+        rightController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue);
+    }
+
+    private void OnDisable()
+    {
+        // Désabonnez-vous des événements de la manette droite
+        rightController.selectInteraction.RemoveListener(OnRightSelect);
+        rightController.activateInteraction.RemoveListener(OnRightActivate);
+        rightController.deactivateInteraction.RemoveListener(OnRightDeactivate);
+    }
+
+    private void OnRightSelect(XRBaseInteractor interactor)
+    {
+        Debug.Log("Bouton de sélection de la manette droite enfoncé");
+    }
+
+    private void OnRightActivate(XRBaseInteractor interactor)
+    {
+        Debug.Log("Bouton d'activation de la manette droite enfoncé");
+    }
+
+    private void OnRightDeactivate(XRBaseInteractor interactor)
+    {
+        Debug.Log("Bouton de désactivation de la manette droite enfoncé");
+    }
+}

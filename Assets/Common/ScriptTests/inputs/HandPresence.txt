@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR;
+
+public class HandPresence : MonoBehaviour
+{
+
+    private InputDevice targetDevice;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        List<InputDevice> devices = new List<InputDevice>();
+        InputDevices.GetDevices(devices);
+
+        foreach (var item in devices)
+        {
+            Debug.Log(item.name + item.characteristics);
+        }
+
+        InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+        InputDevices.GetDevicesWithCharacteristics(rightControllerCharacteristics, devices);
+        foreach (var item in devices)
+        {
+            Debug.Log(item.name + item.characteristics);
+        }
+
+        if(devices.Count > 0){
+            targetDevice = devices[0];
+        }
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+
+// https://sneakydaggergames.medium.com/vr-in-unity-managing-controller-input-and-hand-presence-part-1-controller-set-up-792682dd024d
